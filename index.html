@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Claude ToDo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title">Мои задачи</h1>
+        <span class="count-badge" id="countBadge">0 задач</span>
+      </div>
+
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+      </div>
+
+      <div class="input-row">
+        <input
+          class="task-input"
+          id="taskInput"
+          placeholder="Новая задача..."
+          maxlength="80"
+        />
+        <button class="add-btn" id="addBtn" aria-label="Добавить задачу">
+          +
+        </button>
+      </div>
+
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">Все</button>
+        <button class="filter-btn" data-filter="active">Активные</button>
+        <button class="filter-btn" data-filter="done">Готово</button>
+      </div>
+
+      <ul class="task-list" id="taskList"></ul>
+      <div class="empty-state" id="emptyState">Добавьте первую задачу</div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

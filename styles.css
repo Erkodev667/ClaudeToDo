@@ -1,0 +1,356 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #f0eff8;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* --- Animations --- */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes itemIn {
+  from {
+    opacity: 0;
+    transform: translateX(-18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+@keyframes itemOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    max-height: 80px;
+    margin-bottom: 8px;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(60px) scale(0.92);
+    max-height: 0;
+    margin-bottom: 0;
+  }
+}
+@keyframes btnPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.88);
+  }
+  70% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes checkPop {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.3);
+  }
+  60% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+@keyframes countBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* --- Card Styles --- */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.75rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 24px rgba(83, 74, 183, 0.08);
+  animation: cardIn 0.55s cubic-bezier(0.22, 0.68, 0, 1.3) both;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.count-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: #eeedfe;
+  color: #3c3489;
+}
+
+.progress-bar-wrap {
+  height: 4px;
+  background: #f0eff8;
+  border-radius: 99px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #534ab7;
+  border-radius: 99px;
+  transition: width 0.4s cubic-bezier(0.22, 0.68, 0, 1.2);
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.task-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #e0dff5;
+  background: #f7f6ff;
+  color: #1a1a2e;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+.task-input:focus {
+  border-color: #7f77dd;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(127, 119, 221, 0.15);
+}
+
+.task-input.shake {
+  animation: shake 0.35s ease;
+}
+
+.add-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  border: none;
+  background: #534ab7;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.18s;
+  line-height: 1;
+}
+
+.add-btn:hover {
+  background: #3c3489;
+}
+.add-btn:active {
+  animation: btnPop 0.3s ease;
+}
+
+.filter-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.filter-btn {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  border: 1.5px solid #e0dff5;
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.filter-btn.active {
+  background: #eeedfe;
+  color: #3c3489;
+  border-color: #afa9ec;
+}
+
+.task-list {
+  list-style: none;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid #f0eff8;
+  background: #fff;
+  margin-bottom: 8px;
+  animation: itemIn 0.32s cubic-bezier(0.22, 0.68, 0, 1.2) both;
+  overflow: hidden;
+}
+
+.task-item.done-item {
+  background: #fafaf8;
+}
+
+.task-item.removing {
+  animation: itemOut 0.3s ease forwards;
+  pointer-events: none;
+}
+
+.check-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid #ccc;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  padding: 0;
+}
+
+.check-btn:hover:not(.checked) {
+  border-color: #7f77dd;
+}
+
+.check-btn.checked {
+  background: #534ab7;
+  border-color: #534ab7;
+  animation: checkPop 0.3s ease;
+}
+
+.check-btn.checked::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) translateY(-1px);
+}
+
+.task-text {
+  flex: 1;
+  font-size: 14px;
+  color: #1a1a2e;
+  transition: color 0.2s;
+  word-break: break-word;
+}
+
+.task-text.done-text {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.del-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #bbb;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    background 0.18s,
+    color 0.18s,
+    transform 0.18s;
+  padding: 0;
+}
+
+.del-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  transform: scale(1.15);
+}
+.del-btn:active {
+  transform: scale(0.9);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  color: #bbb;
+  font-size: 13px;
+  animation: pulse 2.5s ease infinite;
+}
